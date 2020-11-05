@@ -6,9 +6,7 @@ public class Korpa {
 
     public boolean dodajArtikl(Artikl a) {
         if(brojArtikala >= 50) return false;
-        artikli[brojArtikala].setNaziv(a.getNaziv());
-        artikli[brojArtikala].setKod(a.getKod());
-        artikli[brojArtikala].setCijena(a.getCijena());
+        artikli[brojArtikala] = new Artikl(a.getNaziv(), a.getCijena(),a.getKod());
         brojArtikala++;
         return true;
     }
@@ -18,27 +16,25 @@ public class Korpa {
     }
 
     public Artikl izbaciArtiklSaKodom(String kod) {
-        Artikl a = new Artikl("", 0, "");
         for(int i = 0; i <  brojArtikala; i++){
-            if(artikli[i].getKod() == kod){
-                a = artikli[i];
-                for(int j = i; j < brojArtikala -1; j++){
+            if(artikli[i].getKod().equals(kod)){
+                Artikl a = new Artikl( artikli[i].getNaziv(),artikli[i].getCijena() ,artikli[i].getKod());
+                artikli[i] = null;
+                for(int j = i; j < brojArtikala-1; j++){
                     artikli[j] = artikli[j+1];
                 }
+                artikli[brojArtikala -1 ] = null;
                 brojArtikala--;
-                break; //jedinstevi su kodovi pa smo izbacili taj artikl
+                return a; //jedinstevi su kodovi pa smo izbacili taj artikl
             }
         }
-        //vratiti artikl u supermarket
-        return a;
-
+        return null;
     }
 
     public int dajUkupnuCijenuArtikala() {
         int ukupnaCijena = 0;
-
-        for(Artikl a :  artikli){
-            ukupnaCijena =  a.getCijena();
+        for(int i = 0; i <  brojArtikala; i++){
+            ukupnaCijena  +=  artikli[i].getCijena();
         }
         return ukupnaCijena;
     }

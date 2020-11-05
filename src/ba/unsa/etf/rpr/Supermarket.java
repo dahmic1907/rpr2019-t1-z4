@@ -9,22 +9,28 @@ public class Supermarket {
     }
 
     public Artikl izbaciArtiklSaKodom(String kod) {
-        Artikl a = new Artikl("", 1, "");
         for(int i = 0; i < brojArtikalaSupermarketa; i++){
-            if(artikli_supermarketa[i].getKod() == kod){
-                a  = artikli_supermarketa[i];
-                for(int j = 0; j < brojArtikalaSupermarketa-1; j++){
+            if(artikli_supermarketa[i].getKod().equals(kod)){
+                Artikl a = new Artikl(artikli_supermarketa[i].getNaziv(), artikli_supermarketa[i].getCijena(), artikli_supermarketa[i].getKod());
+                artikli_supermarketa[i] = null;
+                for(int j = i; j < brojArtikalaSupermarketa-1; j++){
                     artikli_supermarketa[j] = artikli_supermarketa[j+1];
                 }
+                artikli_supermarketa[brojArtikalaSupermarketa -1]= null;
                 brojArtikalaSupermarketa --;
-                break; //jedinstven kod pa mozemo prekinuti
+                return a ; //jedinstven kod pa mozemo prekinuti
             }
         }
-        return a;
+        return null;
     }
 
-    public void dodajArtikl(Artikl a) {
-        artikli_supermarketa[brojArtikalaSupermarketa] = a;
-        brojArtikalaSupermarketa++;
+    public boolean dodajArtikl(Artikl a) {
+        if(brojArtikalaSupermarketa < 1000) {
+            artikli_supermarketa[brojArtikalaSupermarketa] = new Artikl(a.getNaziv(), a.getCijena(), a.getKod());
+            brojArtikalaSupermarketa++;
+            return true;
+        }
+        return false;
+
     }
 }
