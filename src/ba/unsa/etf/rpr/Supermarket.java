@@ -33,4 +33,11 @@ public class Supermarket {
         return false;
 
     }
+    int getBrojArtikalaSupermarketa(){
+        return brojArtikalaSupermarketa;
+    }
+    void setBrojArtikalaSupermarketa(int n){
+        brojArtikalaSupermarketa = n;
+    }
 }
+

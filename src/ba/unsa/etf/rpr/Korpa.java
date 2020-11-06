@@ -38,7 +38,11 @@ public class Korpa {
         }
         return ukupnaCijena;
     }
-
-
+    void setBrojArtikala(int n){
+        brojArtikala = n;
+    }
+    int getBrojArtikala(){
+        return  brojArtikala;
+    }
 
 }
